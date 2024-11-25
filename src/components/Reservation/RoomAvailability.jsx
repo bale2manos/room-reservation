@@ -11,8 +11,13 @@ import {
     Text,
     Stack
 } from '@chakra-ui/react'
+import { useReservations } from '../../context/ReservationContext'
+import { useAuth } from '../../context/AuthContext'
 
 export function RoomAvailability({ onRoomSelect, formData }) {
+    const { isRoomAvailable } = useReservations()
+    const { user } = useAuth()
+
     console.log('RoomAvailability formData:', formData) // Debug log
 
     // Generate rooms based on the selected library
@@ -58,25 +63,37 @@ export function RoomAvailability({ onRoomSelect, formData }) {
                         <Tr>
                             <Th>ROOM</Th>
                             <Th>CAPACITY</Th>
+                            <Th>STATUS</Th>
                             <Th>ACTIONS</Th>
                         </Tr>
                     </Thead>
                     <Tbody>
-                        {availableRooms.map((room) => (
-                            <Tr key={room.id}>
-                                <Td fontWeight="medium">{room.name}</Td>
-                                <Td>{room.capacity} people</Td>
-                                <Td>
-                                    <Button
-                                        size="sm"
-                                        colorScheme="blue"
-                                        onClick={() => onRoomSelect(room)}
-                                    >
-                                        Reserve
-                                    </Button>
-                                </Td>
-                            </Tr>
-                        ))}
+                        {availableRooms.map((room) => {
+                            const isAvailable = isRoomAvailable(
+                                formData.library,
+                                room.id,
+                                formData.date,
+                                formData.time
+                            )
+
+                            return (
+                                <Tr key={room.id}>
+                                    <Td fontWeight="medium">{room.name}</Td>
+                                    <Td>{room.capacity} people</Td>
+                                    <Td>{isAvailable ? 'Available' : 'Booked'}</Td>
+                                    <Td>
+                                        <Button
+                                            size="sm"
+                                            colorScheme="primary"
+                                            onClick={() => onRoomSelect(room)}
+                                            isDisabled={!isAvailable}
+                                        >
+                                            Reserve
+                                        </Button>
+                                    </Td>
+                                </Tr>
+                            )
+                        })}
                     </Tbody>
                 </Table>
             </Stack>

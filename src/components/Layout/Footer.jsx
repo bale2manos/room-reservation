@@ -30,7 +30,7 @@ import {
                 For comments and suggestions, please email:{' '}
                 <Link
                   href="mailto:biblioteca@db.uc3m.es"
-                  color="uc3m.500"
+                  color="primary.500"
                   isExternal
                 >
                   biblioteca@db.uc3m.es
@@ -44,8 +44,8 @@ import {
                   aria-label="Visit UC3M website"
                 >
                   <Image
-                    h="32px"
-                    src="/uc3m-logo.png"
+                    h="40px"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Logo_UC3M.svg/2048px-Logo_UC3M.svg.png"
                     alt="UC3M Logo"
                   />
                 </Link>

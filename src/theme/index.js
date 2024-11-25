@@ -2,15 +2,23 @@ import { extendTheme } from '@chakra-ui/react'
 
 export const theme = extendTheme({
   colors: {
-    uc3m: {
-      500: '#ff6400', // UC3M orange
-      600: '#de4558', // Error red
+    primary: {
+      50: '#e9ecf8',
+      100: '#c3ccec',
+      200: '#9cacdf',
+      300: '#748bd3',
+      400: '#4c6bc6',
+      500: '#3152b4', // Main color
+      600: '#2a449d',
+      700: '#233785',
+      800: '#1b2a6e',
+      900: '#141d56',
     }
   },
   components: {
     Button: {
       defaultProps: {
-        colorScheme: 'uc3m',
+        colorScheme: 'primary',
       }
     }
   }

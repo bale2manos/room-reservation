@@ -1,69 +1,70 @@
-import { Box, Button, Flex } from '@chakra-ui/react'
+import { Box, Button, toast, useToast } from '@chakra-ui/react'
 import { ArrowBackIcon } from '@chakra-ui/icons'
 import { useState } from 'react'
-import { MyReservations } from './MyReservations'
+import { useNavigate } from 'react-router-dom'
 import { ReservationForm } from './ReservationForm'
 import { RoomAvailability } from './RoomAvailability'
+import { useReservations } from '../../context/ReservationContext'
+import { useAuth } from '../../context/AuthContext'
 
 export function ReservationSystem() {
-  const [step, setStep] = useState('form')
+  const { addReservation } = useReservations()
+  const { user } = useAuth()
+  const toast = useToast()
+  const navigate = useNavigate()
+  const [showRoomSelection, setShowRoomSelection] = useState(false)
   const [formData, setFormData] = useState(null)
-  const [newReservation, setNewReservation] = useState(null)
 
   const handleFormSubmit = (data) => {
     setFormData(data)
-    setStep('availability')
+    setShowRoomSelection(true)
   }
 
   const handleRoomSelect = (room) => {
-    const reservationData = {
-      ...formData,
-      room: room
+    const newReservation = {
+      id: Date.now().toString(),
+      username: user.username,
+      library: formData.library,
+      roomId: room.id,
+      roomName: room.name,
+      date: formData.date,
+      time: formData.time,
+      status: 'active',
+      createdAt: new Date().toISOString()
     }
-    setNewReservation(reservationData)
-    setStep('reservations')
-  }
 
-  const handleBack = () => {
-    switch (step) {
-      case 'availability':
-        setStep('form')
-        setFormData(null)
-        break
-      case 'reservations':
-        setStep('availability')
-        break
-      default:
-        break
-    }
+    addReservation(newReservation)
+    toast({
+      title: 'Room Reserved!',
+      description: `You have successfully reserved ${room.name}`,
+      status: 'success',
+      duration: 3000,
+    })
+    
+    // Reset form and redirect to reservations page
+    setShowRoomSelection(false)
+    setFormData(null)
+    navigate('/reservations')
   }
 
   return (
     <Box>
-      {step !== 'form' && (
-        <Flex mb={6}>
+      {!showRoomSelection ? (
+        <ReservationForm onSubmit={handleFormSubmit} />
+      ) : (
+        <>
           <Button
             leftIcon={<ArrowBackIcon />}
-            onClick={handleBack}
-            variant="ghost"
-            aria-label="Go back to previous step"
+            onClick={() => setShowRoomSelection(false)}
+            mb={4}
           >
-            Back
+            Back to Form
           </Button>
-        </Flex>
-      )}
-
-      {step === 'form' && (
-        <ReservationForm onSubmit={handleFormSubmit} />
-      )}
-      {step === 'availability' && formData && (
-        <RoomAvailability 
-          onRoomSelect={handleRoomSelect}
-          formData={formData}
-        />
-      )}
-      {step === 'reservations' && (
-        <MyReservations newReservation={newReservation} />
+          <RoomAvailability
+            onRoomSelect={handleRoomSelect}
+            formData={formData}
+          />
+        </>
       )}
     </Box>
   )

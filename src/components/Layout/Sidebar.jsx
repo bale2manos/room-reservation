@@ -6,10 +6,13 @@ import {
     Text,
     useColorModeValue,
   } from '@chakra-ui/react'
-  import { CalendarIcon, SettingsIcon, ExternalLinkIcon } from '@chakra-ui/icons'
+  import { CalendarIcon, SettingsIcon, ExternalLinkIcon, AddIcon } from '@chakra-ui/icons'
   import { Link as RouterLink } from 'react-router-dom'
+  import { useAuth } from '../../context/AuthContext'
+  import { useNavigate } from 'react-router-dom'
   
   export function Sidebar() {
+    const { logout } = useAuth()
     const bgColor = useColorModeValue('gray.50', 'gray.900')
     const borderColor = useColorModeValue('gray.200', 'gray.700')
   
@@ -21,10 +24,15 @@ import {
         bg={bgColor}
         borderRight="1px"
         borderColor={borderColor}
-        h="calc(100vh - 64px)" // Subtract header height
+        h="calc(100vh - 64px)"
         py={4}
       >
         <VStack spacing={2} align="stretch">
+          <NavItem
+            icon={AddIcon}
+            to="/"
+            label="Book a Room"
+          />
           <NavItem
             icon={CalendarIcon}
             to="/reservations"
@@ -37,8 +45,9 @@ import {
           />
           <NavItem
             icon={ExternalLinkIcon}
-            to="/logout"
+            onClick={logout}
             label="Logout"
+            isLogout={true}
           />
         </VStack>
   
@@ -47,7 +56,7 @@ import {
             Need help? Contact{' '}
             <Link
               href="mailto:biblioteca@db.uc3m.es"
-              color="uc3m.500"
+              color="primary.500"
               isExternal
             >
               biblioteca@db.uc3m.es
@@ -58,30 +67,54 @@ import {
     )
   }
   
-  function NavItem({ icon, to, label }) {
+  function NavItem({ icon: IconComponent, label, onClick, to, isLogout }) {
+    const navigate = useNavigate()
+    const { logout } = useAuth()
+  
+    const handleClick = () => {
+      if (isLogout) {
+        navigate('/')
+        setTimeout(() => {
+          logout()
+        }, 100)
+      } else if (onClick) {
+        onClick()
+      }
+    }
+  
+    const Component = isLogout ? Box : (to ? RouterLink : Box)
+    const props = isLogout ? {
+      as: 'button',
+      onClick: handleClick,
+      width: '100%',
+      tabIndex: 0,
+    } : (to ? { to } : { onClick: handleClick })
+  
     return (
-      <Link
-        as={RouterLink}
-        to={to}
+      <Box
+        as={Component}
+        {...props}
         style={{ textDecoration: 'none' }}
-        _focus={{ boxShadow: 'none' }}
+        px={4}
+        py={2}
+        color="gray.700"
+        _hover={{
+          bg: 'primary.50',
+          color: isLogout ? 'red.700' : 'primary.700',
+        }}
+        _focus={{
+          outline: '2px solid',
+          outlineColor: 'primary.500',
+          bg: 'primary.50',
+        }}
+        display="flex"
+        alignItems="center"
+        cursor="pointer"
+        width="100%"
+        role={isLogout ? 'button' : undefined}
       >
-        <Box
-          display="flex"
-          alignItems="center"
-          p={2}
-          mx={4}
-          borderRadius="lg"
-          role="group"
-          cursor="pointer"
-          _hover={{
-            bg: 'uc3m.500',
-            color: 'white',
-          }}
-        >
-          <Icon as={icon} mr={4} />
-          <Text>{label}</Text>
-        </Box>
-      </Link>
+        <Icon as={IconComponent} mr={2} />
+        <Text>{label}</Text>
+      </Box>
     )
   }
