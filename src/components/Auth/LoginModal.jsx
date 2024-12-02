@@ -14,8 +14,10 @@ import {
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import { useAuth } from '../../context/AuthContext'
+import { useTranslation } from 'react-i18next';
 
 export function LoginModal({ isOpen, onClose }) {
+  const { t } = useTranslation();
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const { login } = useAuth()
@@ -25,8 +27,8 @@ export function LoginModal({ isOpen, onClose }) {
     e.preventDefault()
     if (!username || !password) {
       toast({
-        title: 'Error',
-        description: 'Please fill in all fields',
+        title: t('auth.errors.title'),
+        description: t('auth.errors.fillFields'),
         status: 'error',
         duration: 3000,
       })
@@ -41,8 +43,8 @@ export function LoginModal({ isOpen, onClose }) {
     })
     
     toast({
-      title: `Welcome ${username}!`,
-      description: 'You have successfully logged in',
+      title: t('auth.welcome', { username }),
+      description: t('auth.loginSuccess'),
       status: 'success',
       duration: 3000,
       position: 'top',
@@ -62,25 +64,25 @@ export function LoginModal({ isOpen, onClose }) {
         bg='blackAlpha.300'
       />
       <ModalContent>
-        <ModalHeader>Welcome to UC3M Library</ModalHeader>
+        <ModalHeader>{t('auth.header')}</ModalHeader>
         <ModalBody>
           <form onSubmit={handleSubmit}>
             <VStack spacing={4}>
               <FormControl isRequired>
-                <FormLabel>Username</FormLabel>
+                <FormLabel>{t('auth.username')}</FormLabel>
                 <Input
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  placeholder="Enter your username"
+                  placeholder={t('auth.usernamePlaceholder')}
                 />
               </FormControl>
               <FormControl isRequired>
-                <FormLabel>Password</FormLabel>
+                <FormLabel>{t('auth.password')}</FormLabel>
                 <Input
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Enter your password"
+                  placeholder={t('auth.passwordPlaceholder')}
                 />
               </FormControl>
             </VStack>
@@ -88,7 +90,7 @@ export function LoginModal({ isOpen, onClose }) {
         </ModalBody>
         <ModalFooter>
           <Button colorScheme="primary" onClick={handleSubmit}>
-            Login
+            {t('auth.loginButton')}
           </Button>
         </ModalFooter>
       </ModalContent>

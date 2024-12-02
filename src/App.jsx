@@ -11,6 +11,8 @@ import { AuthProvider, useAuth } from './context/AuthContext'
 import { theme } from './theme'
 import { useEffect } from 'react'
 import { ReservationProvider } from './context/ReservationContext'
+import { I18nextProvider } from 'react-i18next'
+import i18n from './i18n'
 
 function AppContent() {
   const { user } = useAuth()
@@ -44,13 +46,15 @@ function AppContent() {
 
 function App() {
   return (
-    <ChakraProvider theme={theme}>
-      <AuthProvider>
-        <ReservationProvider>
-          <AppContent />
-        </ReservationProvider>
-      </AuthProvider>
-    </ChakraProvider>
+    <I18nextProvider i18n={i18n}>
+      <ChakraProvider theme={theme}>
+        <AuthProvider>
+          <ReservationProvider>
+            <AppContent />
+          </ReservationProvider>
+        </AuthProvider>
+      </ChakraProvider>
+    </I18nextProvider>
   )
 }
 

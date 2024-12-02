@@ -10,8 +10,10 @@ import {
   import { Link as RouterLink } from 'react-router-dom'
   import { useAuth } from '../../context/AuthContext'
   import { useNavigate } from 'react-router-dom'
+  import { useTranslation } from 'react-i18next'
   
   export function Sidebar() {
+    const { t } = useTranslation();
     const { logout } = useAuth()
     const bgColor = useColorModeValue('gray.50', 'gray.900')
     const borderColor = useColorModeValue('gray.200', 'gray.700')
@@ -19,7 +21,7 @@ import {
     return (
       <Box
         as="nav"
-        aria-label="Main Navigation"
+        aria-label={t('layout.sidebar.mainNav')}
         w="240px"
         bg={bgColor}
         borderRight="1px"
@@ -31,29 +33,29 @@ import {
           <NavItem
             icon={AddIcon}
             to="/"
-            label="Book a Room"
+            label={t('common.bookRoom')}
           />
           <NavItem
             icon={CalendarIcon}
             to="/reservations"
-            label="My Reservations"
+            label={t('common.myReservations')}
           />
           <NavItem
             icon={SettingsIcon}
             to="/profile"
-            label="My Profile"
+            label={t('common.myProfile')}
           />
           <NavItem
             icon={ExternalLinkIcon}
             onClick={logout}
-            label="Logout"
+            label={t('common.logout')}
             isLogout={true}
           />
         </VStack>
   
         <Box pt={8} px={4}>
           <Text fontSize="sm" color="gray.500">
-            Need help? Contact{' '}
+            {t('layout.sidebar.needHelp')}{' '}
             <Link
               href="mailto:biblioteca@db.uc3m.es"
               color="primary.500"

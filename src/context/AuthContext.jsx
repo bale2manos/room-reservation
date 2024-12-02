@@ -1,8 +1,10 @@
 import { createContext, useContext, useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const AuthContext = createContext(null)
 
 export function AuthProvider({ children }) {
+  const { t } = useTranslation()
   const [user, setUser] = useState(() => {
     const savedUser = localStorage.getItem('user')
     return savedUser ? JSON.parse(savedUser) : null
@@ -17,6 +19,9 @@ export function AuthProvider({ children }) {
   }, [user])
 
   const login = (userData) => {
+    if (!userData) {
+      throw new Error(t('auth.errors.userNotFound'))
+    }
     setUser(userData)
   }
 
@@ -24,8 +29,15 @@ export function AuthProvider({ children }) {
     setUser(null)
   }
 
+  const checkAuth = () => {
+    if (!user) {
+      throw new Error(t('auth.errors.loginRequired'))
+    }
+    return true
+  }
+
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout, checkAuth }}>
       {children}
     </AuthContext.Provider>
   )

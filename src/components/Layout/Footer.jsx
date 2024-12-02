@@ -7,62 +7,50 @@ import {
     Image,
     Divider,
   } from '@chakra-ui/react'
+  import { useTranslation } from 'react-i18next'
   
   export function Footer() {
+    const { t } = useTranslation();
+    const currentYear = new Date().getFullYear();
+
     return (
       <Box
         as="footer"
-        role="contentinfo"
         bg="white"
         borderTop="1px"
         borderColor="gray.200"
-        py={6}
+        py={4}
       >
         <Container maxW="container.xl">
-          <Stack spacing={6}>
-            <Stack
-              direction={{ base: 'column', md: 'row' }}
-              justify="space-between"
-              align="center"
-              spacing={4}
-            >
-              <Text fontSize="sm">
-                For comments and suggestions, please email:{' '}
+          <Stack spacing={4} direction={{ base: 'column', md: 'row' }} justify="space-between" align="center">
+            <Stack direction="row" spacing={2} align="center">
+              <Text color="gray.600">
+                {t('layout.footer.comments')}{' '}
                 <Link
                   href="mailto:biblioteca@db.uc3m.es"
                   color="primary.500"
-                  isExternal
                 >
                   biblioteca@db.uc3m.es
                 </Link>
               </Text>
-  
-              <Stack direction="row" spacing={4}>
-                <Link
-                  href="https://www.uc3m.es"
-                  isExternal
-                  aria-label="Visit UC3M website"
-                >
-                  <Image
-                    h="40px"
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Logo_UC3M.svg/2048px-Logo_UC3M.svg.png"
-                    alt="UC3M Logo"
-                  />
-                </Link>
-              </Stack>
             </Stack>
   
-            <Divider />
+            <Stack direction="row" spacing={2} align="center">
+              <Text color="gray.600">
+                © {currentYear} {t('layout.footer.rights')}
+              </Text>
+            </Stack>
   
-            <Text fontSize="sm" color="gray.500" textAlign="center">
-              © {new Date().getFullYear()} Universidad Carlos III de Madrid. 
-              All rights reserved.
-            </Text>
-  
-            <Text fontSize="xs" color="gray.400" textAlign="center">
-              Developed by: Servei de Biblioteques, Publicacions y Arxius. 
-              Universitat Politècnica de Catalunya · BarcelonaTech
-            </Text>
+            <Stack direction="row" spacing={2} align="center">
+              <Text color="gray.500" fontSize="sm">
+                {t('layout.footer.developedBy')}
+              </Text>
+              <Image
+                src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Logo_UC3M.svg"
+                alt="UC3M Logo"
+                height="30px"
+              />
+            </Stack>
           </Stack>
         </Container>
       </Box>

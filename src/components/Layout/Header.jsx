@@ -2,10 +2,13 @@ import { Box, Heading, SkipNavLink, Flex, Avatar, Text, Image, Menu, MenuButton,
 import { CalendarIcon, SettingsIcon, ExternalLinkIcon, AddIcon, ChevronDownIcon } from '@chakra-ui/icons'
 import { useAuth } from '../../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
+import { LanguageSwitcher } from '../LanguageSwitcher'
+import { useTranslation } from 'react-i18next'
 
 export function Header() {
   const { user, logout } = useAuth()
   const navigate = useNavigate()
+  const { t } = useTranslation()
 
   const handleLogoClick = () => {
     navigate('/')
@@ -24,7 +27,7 @@ export function Header() {
 
   return (
     <Box as="header" bg="primary.500" color="white" p={4}>
-      <SkipNavLink>Skip to main content</SkipNavLink>
+      <SkipNavLink>{t('layout.header.skipNav')}</SkipNavLink>
       
       <Flex justify="space-between" align="center">
         <Flex 
@@ -48,79 +51,57 @@ export function Header() {
             filter="brightness(0) invert(1)"
           />
           <Heading size="lg">
-            Library Room Reservation
+            {t('layout.header.title')}
           </Heading>
         </Flex>
 
-        {user && (
-          <Menu>
-            <MenuButton
-              p={2}
-              _focus={{
-                outline: '2px solid white',
-                outlineOffset: '2px',
-                borderRadius: 'md',
-              }}
-            >
-              <Flex align="center" gap={2}>
-                <Text fontSize="sm">{user.username}</Text>
-                <Avatar
-                  size="sm"
-                  name={user.username}
-                  src={user.avatar}
-                />
-                <ChevronDownIcon />
-              </Flex>
-            </MenuButton>
-            <MenuList color="gray.700">
-              <MenuItem
-                icon={<Icon as={AddIcon} />}
-                onClick={() => handleMenuClick('/')}
+        <Flex align="center" gap={4}>
+          <LanguageSwitcher />
+          {user && (
+            <Menu>
+              <MenuButton
+                p={2}
                 _focus={{
-                  bg: 'primary.50',
-                  color: 'primary.700',
+                  outline: '2px solid white',
+                  outlineOffset: '2px',
+                  borderRadius: 'md',
                 }}
               >
-                Book a Room
-              </MenuItem>
-              <MenuItem
-                icon={<Icon as={CalendarIcon} />}
-                onClick={() => handleMenuClick('/reservations')}
-                _focus={{
-                  bg: 'primary.50',
-                  color: 'primary.700',
-                }}
-              >
-                My Reservations
-              </MenuItem>
-              <MenuItem
-                icon={<Icon as={SettingsIcon} />}
-                onClick={() => handleMenuClick('/profile')}
-                _focus={{
-                  bg: 'primary.50',
-                  color: 'primary.700',
-                }}
-              >
-                My Profile
-              </MenuItem>
-              <MenuItem
-                icon={<Icon as={ExternalLinkIcon} color="inherit" />}
-                onClick={() => handleMenuClick('logout')}
-                sx={{
-                  '&:hover, &:focus': {
-                    bg: 'red.50',
-                    color: 'red.700',
-                    '& svg': {
-                      color: 'red.700',
-                    }
-                  }
-                }}
-              >
-                Logout
-              </MenuItem>
-            </MenuList>
-          </Menu>
-        )}
+                <Flex align="center" gap={2}>
+                  <Text fontSize="sm">{user.username}</Text>
+                  <Avatar
+                    size="sm"
+                    name={user.username}
+                    src={user.avatar}
+                  />
+                  <ChevronDownIcon />
+                </Flex>
+              </MenuButton>
+              <MenuList color="gray.700">
+                <MenuItem
+                  icon={<Icon as={AddIcon} />}
+                  onClick={() => handleMenuClick('/')}
+                  _focus={{
+                    bg: 'primary.50',
+                    color: 'primary.700',
+                  }}
+                >
+                  {t('common.bookRoom')}
+                </MenuItem>
+                <MenuItem
+                  icon={<Icon as={CalendarIcon} />}
+                  onClick={() => handleMenuClick('/reservations')}
+                  _focus={{
+                    bg: 'primary.50',
+                    color: 'primary.700',
+                  }}
+                >
+                  {t('common.myReservations')}
+                </MenuItem>
+              </MenuList>
+            </Menu>
+          )}
+        </Flex>
       </Flex>
     </Box>
   )

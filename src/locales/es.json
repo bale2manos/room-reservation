@@ -1,0 +1,162 @@
+{
+  "layout": {
+    "header": {
+      "title": "Reserva de Salas",
+      "skipNav": "Saltar al contenido principal"
+    },
+    "sidebar": {
+      "mainNav": "Navegación Principal",
+      "needHelp": "¿Necesitas ayuda? Contacta"
+    },
+    "footer": {
+      "comments": "¿Necesitas ayuda? Contacta:",
+      "rights": "Universidad Carlos III de Madrid",
+      "developedBy": "Desarrollado por"
+    }
+  },
+  "common": {
+    "bookRoom": "Reservar Sala",
+    "myReservations": "Mis Reservas",
+    "myProfile": "Mi Perfil",
+    "logout": "Cerrar Sesión"
+  },
+  "auth": {
+    "header": "Iniciar Sesión",
+    "username": "Usuario",
+    "password": "Contraseña",
+    "usernamePlaceholder": "Introduce tu usuario",
+    "passwordPlaceholder": "Introduce tu contraseña",
+    "loginButton": "Iniciar Sesión",
+    "welcome": "¡Bienvenido {{username}}!",
+    "loginSuccess": "Has iniciado sesión correctamente",
+    "errors": {
+      "title": "Error",
+      "fillFields": "Por favor, rellena todos los campos",
+      "userNotFound": "Usuario no encontrado",
+      "loginRequired": "Debes iniciar sesión para continuar"
+    }
+  },
+  "pages": {
+    "profile": {
+      "title": "Mi Perfil",
+      "name": "Nombre",
+      "email": "Correo electrónico",
+      "changePhoto": "Cambiar foto",
+      "save": "Guardar cambios",
+      "success": {
+        "photoUpdate": "Foto actualizada correctamente",
+        "profileUpdate": "Perfil actualizado correctamente"
+      }
+    },
+    "reservations": {
+      "title": "Mis Reservas",
+      "noReservations": "No tienes ninguna reserva todavía.",
+      "notSpecified": "No especificado",
+      "cancelSuccess": "Reserva cancelada",
+      "table": {
+        "date": "FECHA",
+        "time": "HORA",
+        "library": "BIBLIOTECA",
+        "room": "SALA",
+        "status": "ESTADO",
+        "actions": "ACCIONES"
+      },
+      "status": {
+        "active": "ACTIVA",
+        "cancelled": "CANCELADA"
+      },
+      "actions": {
+        "cancel": "Cancelar"
+      }
+    }
+  },
+  "reservation": {
+    "form": {
+      "library": {
+        "label": "Biblioteca",
+        "placeholder": "Selecciona una biblioteca"
+      },
+      "date": {
+        "label": "Fecha"
+      },
+      "time": {
+        "label": "Horario",
+        "placeholder": "Selecciona un horario"
+      },
+      "submit": "Comprobar disponibilidad"
+    },
+    "backToForm": "Volver al formulario",
+    "success": {
+      "title": "¡Sala Reservada!",
+      "description": "Has reservado correctamente la {{roomName}}"
+    },
+    "error": {
+      "title": "Error en la reserva"
+    },
+    "rooms": {
+      "type": "Sala {{number}}",
+      "prefix": "Sala",
+      "name": "{{prefix}} {{number}}",
+      "getafe": "Sala G{{number}}",
+      "colmenarejo": "Sala C{{number}}",
+      "leganes": "Sala L{{number}}"
+    },
+    "availableRooms": {
+      "title": "Salas Disponibles",
+      "subtitle": "Biblioteca de {{library}} - {{date}}",
+      "capacity": "{{count}} personas",
+      "table": {
+        "room": "SALA",
+        "capacity": "CAPACIDAD",
+        "status": "ESTADO",
+        "actions": "ACCIONES"
+      },
+      "status": {
+        "available": "Disponible"
+      },
+      "actions": {
+        "reserve": "Reservar"
+      }
+    }
+  },
+  "libraries": {
+    "getafe": "Biblioteca de Getafe",
+    "leganes": "Biblioteca de Leganés",
+    "colmenarejo": "Biblioteca de Colmenarejo"
+  },
+  "context": {
+    "reservation": {
+      "errors": {
+        "pastDateTime": "No es posible realizar reservas para fechas pasadas. Por favor, selecciona una fecha futura.",
+        "roomNotAvailable": "Esta sala ya está reservada para la fecha y hora seleccionada. Por favor, elige otra sala u horario.",
+        "reservationNotFound": "No se encontró la reserva solicitada."
+      }
+    }
+  },
+  "reservations": {
+    "form": {
+      "date": "Fecha",
+      "timeSlot": "Hora",
+      "selectTimeSlot": "Selecciona hora",
+      "checkAvailable": "Comprobar Salas Disponibles",
+      "library": "Biblioteca",
+      "selectLibrary": "Selecciona biblioteca",
+      "libraries": {
+        "getafe": "CC.Sociales y Jurídicas - Getafe",
+        "colmenarejo": "Menéndez Pidal - Colmenarejo",
+        "leganes": "Biblioteca Escuela Politécnica Superior - Leganés"
+      }
+    },
+    "availability": {
+      "title": "Salas Disponibles",
+      "room": "SALA",
+      "capacity": "CAPACIDAD",
+      "status": "ESTADO",
+      "actions": "ACCIONES",
+      "people": "personas",
+      "available": "Disponible",
+      "booked": "Reservada",
+      "reserve": "Reservar"
+    }
+  }
+} 

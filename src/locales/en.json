@@ -1,0 +1,108 @@
+{
+  "layout": {
+    "header": {
+      "title": "Room Reservation",
+      "skipNav": "Skip to main content"
+    },
+    "sidebar": {
+      "mainNav": "Main Navigation",
+      "needHelp": "Need help? Contact"
+    },
+    "footer": {
+      "comments": "Need help? Contact:",
+      "rights": "Universidad Carlos III de Madrid",
+      "developedBy": "Developed by"
+    }
+  },
+  "common": {
+    "bookRoom": "Book a Room",
+    "myReservations": "My Reservations",
+    "myProfile": "My Profile",
+    "logout": "Logout"
+  },
+  "auth": {
+    "header": "Login",
+    "username": "Username",
+    "password": "Password",
+    "usernamePlaceholder": "Enter your username",
+    "passwordPlaceholder": "Enter your password",
+    "loginButton": "Login",
+    "welcome": "Welcome {{username}}!",
+    "loginSuccess": "You have successfully logged in",
+    "errors": {
+      "title": "Error",
+      "fillFields": "Please fill in all fields",
+      "userNotFound": "User not found",
+      "loginRequired": "Login required to continue"
+    }
+  },
+  "pages": {
+    "profile": {
+      "title": "My Profile",
+      "name": "Name",
+      "email": "Email",
+      "avatar": "Profile photo",
+      "changePhoto": "Change photo",
+      "save": "Save changes",
+      "success": {
+        "photoUpdate": "Profile photo updated",
+        "profileUpdate": "Profile updated successfully"
+      }
+    },
+    "reservations": {
+      "title": "My Reservations",
+      "noReservations": "You have no active reservations",
+      "system": {
+        "backToForm": "Back to Form",
+        "roomReserved": "Room Reserved!",
+        "successMessage": "You have successfully reserved {{roomName}}"
+      },
+      "form": {
+        "library": "Library",
+        "selectLibrary": "Select library",
+        "libraries": {
+          "getafe": "Social Sciences and Law - Getafe",
+          "colmenarejo": "Menéndez Pidal - Colmenarejo",
+          "leganes": "Polytechnic School Library - Leganés"
+        },
+        "libraryClosed": "Library Closed",
+        "closedMessage": "The library is closed on Sundays",
+        "date": "Date",
+        "timeSlot": "Time Slot",
+        "selectTimeSlot": "Select time slot",
+        "checkAvailable": "Check Available Rooms"
+      },
+      "availability": {
+        "title": "Available Rooms",
+        "room": "ROOM",
+        "capacity": "CAPACITY",
+        "status": "STATUS",
+        "actions": "ACTIONS",
+        "people": "people",
+        "available": "Available",
+        "booked": "Booked",
+        "reserve": "Reserve"
+      },
+      "myReservations": {
+        "title": "My Reservations",
+        "noReservations": "You don't have any reservations yet",
+        "date": "DATE",
+        "time": "TIME",
+        "library": "LIBRARY",
+        "room": "ROOM",
+        "status": "STATUS",
+        "actions": "ACTIONS",
+        "cancel": "Cancel",
+        "cancelled": "Reservation Cancelled"
+      },
+      "rooms": {
+        "type": "Room {{number}}",
+        "prefix": "Room",
+        "name": "{{prefix}} {{number}}",
+        "getafe": "Room G{{number}}",
+        "colmenarejo": "Room C{{number}}",
+        "leganes": "Room L{{number}}"
+      }
+    }
+  }
+} 
