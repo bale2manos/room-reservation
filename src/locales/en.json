@@ -15,9 +15,10 @@
     }
   },
   "common": {
+    "appTitle": "Room Reservation",
     "bookRoom": "Book a Room",
     "myReservations": "My Reservations",
-    "myProfile": "My Profile",
+    "profile": "My Profile",
     "logout": "Logout"
   },
   "auth": {
@@ -103,6 +104,66 @@
         "colmenarejo": "Room C{{number}}",
         "leganes": "Room L{{number}}"
       }
+    }
+  },
+  "reservation": {
+    "myReservations": {
+      "title": "My Reservations",
+      "noReservations": "You don't have any reservations yet.",
+      "table": {
+        "date": "DATE",
+        "time": "TIME",
+        "library": "LIBRARY",
+        "room": "ROOM",
+        "status": "STATUS",
+        "actions": "ACTIONS"
+      },
+      "cancel": "Cancel"
+    },
+    "form": {
+      "library": {
+        "label": "Library",
+        "placeholder": "Select library",
+        "options": {
+          "getafe": "CC.Sociales y Jurídicas - Getafe",
+          "colmenarejo": "Menéndez Pidal - Colmenarejo",
+          "leganes": "Biblioteca Escuela Politécnica Superior - Leganés"
+        }
+      },
+      "date": {
+        "label": "Date"
+      },
+      "timeSlot": {
+        "label": "Time Slot",
+        "placeholder": "Select time slot"
+      },
+      "submit": "Check Available Rooms",
+      "closed": {
+        "title": "Library Closed",
+        "message": "The library is closed on Sundays"
+      }
+    },
+    "roomAvailability": {
+      "title": "Available Rooms",
+      "table": {
+        "room": "ROOM",
+        "capacity": "CAPACITY",
+        "status": "STATUS",
+        "actions": "ACTIONS"
+      },
+      "capacity": "{{count}} people",
+      "status": {
+        "active": "ACTIVE",
+        "inactive": "INACTIVE",
+        "available": "Available",
+        "booked": "Booked"
+      },
+      "reserve": "Reserve",
+      "backToForm": "Back to Form"
+    },
+    "success": {
+      "title": "Room Reserved!",
+      "description": "You have successfully reserved {{roomName}}"
     }
   }
 } 

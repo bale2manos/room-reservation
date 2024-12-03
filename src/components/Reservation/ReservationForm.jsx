@@ -10,8 +10,10 @@ import {
     Text
 } from '@chakra-ui/react'
 import { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 
 export function ReservationForm({ onSubmit }) {
+    const { t } = useTranslation()
     const toast = useToast()
     const [selectedLibrary, setSelectedLibrary] = useState('')
     const [selectedDate, setSelectedDate] = useState('')
@@ -25,8 +27,8 @@ export function ReservationForm({ onSubmit }) {
             if (day === 0) {
                 setTimeSlots([])
                 toast({
-                    title: "Library Closed",
-                    description: "The library is closed on Sundays",
+                    title: t('reservation.form.closed.title'),
+                    description: t('reservation.form.closed.message'),
                     status: "info",
                     duration: 3000,
                 })
@@ -45,7 +47,7 @@ export function ReservationForm({ onSubmit }) {
             }
             setTimeSlots(slots)
         }
-    }, [selectedDate, toast])
+    }, [selectedDate, toast, t])
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -64,21 +66,21 @@ export function ReservationForm({ onSubmit }) {
         <Box as="form" onSubmit={handleSubmit}>
             <VStack spacing={4} align="stretch">
                 <FormControl isRequired>
-                    <FormLabel htmlFor="library">Library</FormLabel>
+                    <FormLabel htmlFor="library">{t('reservation.form.library.label')}</FormLabel>
                     <Select 
                         id="library" 
-                        placeholder="Select library"
+                        placeholder={t('reservation.form.library.placeholder')}
                         onChange={(e) => setSelectedLibrary(e.target.value)}
                         value={selectedLibrary}
                     >
-                        <option value="getafe">CC.Sociales y Jurídicas - Getafe</option>
-                        <option value="colmenarejo">Menéndez Pidal - Colmenarejo</option>
-                        <option value="leganes">Biblioteca Escuela Politécnica Superior - Leganés</option>
+                        <option value="getafe">{t('reservation.form.library.options.getafe')}</option>
+                        <option value="colmenarejo">{t('reservation.form.library.options.colmenarejo')}</option>
+                        <option value="leganes">{t('reservation.form.library.options.leganes')}</option>
                     </Select>
                 </FormControl>
 
                 <FormControl isRequired>
-                    <FormLabel htmlFor="date">Date</FormLabel>
+                    <FormLabel htmlFor="date">{t('reservation.form.date.label')}</FormLabel>
                     <Input
                         id="date"
                         type="date"
@@ -89,11 +91,11 @@ export function ReservationForm({ onSubmit }) {
                 </FormControl>
 
                 <FormControl isRequired>
-                    <FormLabel htmlFor="timeSlot">Time Slot</FormLabel>
+                    <FormLabel htmlFor="timeSlot">{t('reservation.form.timeSlot.label')}</FormLabel>
                     <Select
                         id="timeSlot"
                         name="timeSlot"
-                        placeholder="Select time slot"
+                        placeholder={t('reservation.form.timeSlot.placeholder')}
                         isDisabled={!selectedDate || timeSlots.length === 0}
                     >
                         {timeSlots.map(slot => (
@@ -109,7 +111,7 @@ export function ReservationForm({ onSubmit }) {
                     colorScheme="blue"
                     isDisabled={!selectedLibrary || !selectedDate || timeSlots.length === 0}
                 >
-                    Check Available Rooms
+                    {t('reservation.form.submit')}
                 </Button>
             </VStack>
         </Box>

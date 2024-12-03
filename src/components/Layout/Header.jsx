@@ -1,4 +1,4 @@
-import { Box, Heading, SkipNavLink, Flex, Avatar, Text, Image, Menu, MenuButton, MenuList, MenuItem, Icon } from '@chakra-ui/react'
+import { Box, Heading, SkipNavLink, Flex, Avatar, Text, Image, Menu, MenuButton, MenuList, MenuItem, Icon, MenuDivider } from '@chakra-ui/react'
 import { CalendarIcon, SettingsIcon, ExternalLinkIcon, AddIcon, ChevronDownIcon } from '@chakra-ui/icons'
 import { useAuth } from '../../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
@@ -15,14 +15,7 @@ export function Header() {
   }
 
   const handleMenuClick = (path) => {
-    if (path === 'logout') {
-      navigate('/')
-      setTimeout(() => {
-        logout()
-      }, 100)
-    } else {
-      navigate(path)
-    }
+    navigate(path)
   }
 
   return (
@@ -97,6 +90,27 @@ export function Header() {
                   }}
                 >
                   {t('common.myReservations')}
+                </MenuItem>
+                <MenuItem
+                  icon={<Icon as={SettingsIcon} />}
+                  onClick={() => handleMenuClick('/profile')}
+                  _focus={{
+                    bg: 'primary.50',
+                    color: 'primary.700',
+                  }}
+                >
+                  {t('common.profile')}
+                </MenuItem>
+                <MenuDivider />
+                <MenuItem
+                  icon={<Icon as={ExternalLinkIcon} />}
+                  onClick={logout}
+                  _focus={{
+                    bg: 'primary.50',
+                    color: 'primary.700',
+                  }}
+                >
+                  {t('common.logout')}
                 </MenuItem>
               </MenuList>
             </Menu>

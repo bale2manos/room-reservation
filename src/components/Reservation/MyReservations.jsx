@@ -16,18 +16,20 @@ import { useState, useEffect } from 'react'
 import { useReservations } from '../../context/ReservationContext'
 import { useAuth } from '../../context/AuthContext'
 import { useToast } from '@chakra-ui/react'
+import { useTranslation } from 'react-i18next'
 
 export function MyReservations() {
     const { getUserReservations, cancelReservation } = useReservations()
     const { user } = useAuth()
     const toast = useToast()
+    const { t } = useTranslation()
 
     const userReservations = getUserReservations(user.username)
 
     const handleCancelReservation = (reservationId) => {
         cancelReservation(reservationId)
         toast({
-            title: 'Reservation Cancelled',
+            title: t('reservation.myReservations.cancel'),
             status: 'info',
             duration: 3000,
         })
@@ -35,29 +37,29 @@ export function MyReservations() {
 
     return (
         <Box>
-            <Heading mb={6}>My Reservations</Heading>
+            <Heading mb={6}>{t('reservation.myReservations.title')}</Heading>
             {userReservations.length === 0 ? (
                 <Alert status="info">
                     <AlertIcon />
-                    You don't have any reservations yet.
+                    {t('reservation.myReservations.noReservations')}
                 </Alert>
             ) : (
                 <Table variant="simple">
                     <Thead>
                         <Tr>
-                            <Th>DATE</Th>
-                            <Th>TIME</Th>
-                            <Th>LIBRARY</Th>
-                            <Th>ROOM</Th>
-                            <Th>STATUS</Th>
-                            <Th>ACTIONS</Th>
+                            <Th>{t('reservation.myReservations.table.date')}</Th>
+                            <Th>{t('reservation.myReservations.table.time')}</Th>
+                            <Th>{t('reservation.myReservations.table.library')}</Th>
+                            <Th>{t('reservation.myReservations.table.room')}</Th>
+                            <Th>{t('reservation.myReservations.table.status')}</Th>
+                            <Th>{t('reservation.myReservations.table.actions')}</Th>
                         </Tr>
                     </Thead>
                     <Tbody>
                         {userReservations.map((reservation) => (
                             <Tr key={reservation.id}>
                                 <Td>{reservation.date}</Td>
-                                <Td>{reservation.time}</Td>
+                                <Td>{reservation.timeSlot || reservation.time}</Td>
                                 <Td>
                                     {reservation.library.charAt(0).toUpperCase() + 
                                      reservation.library.slice(1)}
@@ -71,7 +73,9 @@ export function MyReservations() {
                                                 : 'red'
                                         }
                                     >
-                                        {reservation.status.toUpperCase()}
+                                        {reservation.status === 'active' 
+                                            ? t('reservation.roomAvailability.status.active')
+                                            : t('reservation.roomAvailability.status.inactive')}
                                     </Badge>
                                 </Td>
                                 <Td>
@@ -81,7 +85,7 @@ export function MyReservations() {
                                             colorScheme="red"
                                             onClick={() => handleCancelReservation(reservation.id)}
                                         >
-                                            Cancel
+                                            {t('reservation.myReservations.cancel')}
                                         </Button>
                                     )}
                                 </Td>

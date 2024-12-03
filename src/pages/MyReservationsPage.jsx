@@ -7,7 +7,6 @@ export function MyReservationsPage() {
 
   return (
     <Box p={4}>
-      <Heading mb={6}>{t('pages.reservations.title')}</Heading>
       <MyReservations />
     </Box>
   )

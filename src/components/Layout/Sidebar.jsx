@@ -18,6 +18,24 @@ import {
     const bgColor = useColorModeValue('gray.50', 'gray.900')
     const borderColor = useColorModeValue('gray.200', 'gray.700')
   
+    const navItems = [
+      {
+        icon: AddIcon,
+        label: t('common.bookRoom'),
+        to: '/'
+      },
+      {
+        icon: CalendarIcon,
+        label: t('common.myReservations'),
+        to: '/reservations'
+      },
+      {
+        icon: SettingsIcon,
+        label: t('common.profile'),
+        to: '/profile'
+      }
+    ]
+  
     return (
       <Box
         as="nav"
@@ -30,21 +48,14 @@ import {
         py={4}
       >
         <VStack spacing={2} align="stretch">
-          <NavItem
-            icon={AddIcon}
-            to="/"
-            label={t('common.bookRoom')}
-          />
-          <NavItem
-            icon={CalendarIcon}
-            to="/reservations"
-            label={t('common.myReservations')}
-          />
-          <NavItem
-            icon={SettingsIcon}
-            to="/profile"
-            label={t('common.myProfile')}
-          />
+          {navItems.map((item, index) => (
+            <NavItem
+              key={index}
+              icon={item.icon}
+              to={item.to}
+              label={item.label}
+            />
+          ))}
           <NavItem
             icon={ExternalLinkIcon}
             onClick={logout}

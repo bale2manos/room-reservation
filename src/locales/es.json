@@ -15,9 +15,10 @@
     }
   },
   "common": {
+    "appTitle": "Reserva de Salas",
     "bookRoom": "Reservar Sala",
     "myReservations": "Mis Reservas",
-    "myProfile": "Mi Perfil",
+    "profile": "Mi Perfil",
     "logout": "Cerrar Sesión"
   },
   "auth": {
@@ -66,57 +67,68 @@
         "cancelled": "CANCELADA"
       },
       "actions": {
-        "cancel": "Cancelar"
+        "cancel": "Reserva cancelada"
       }
     }
   },
   "reservation": {
+    "myReservations": {
+      "title": "Mis Reservas",
+      "noReservations": "No tienes ninguna reserva todavía.",
+      "table": {
+        "date": "FECHA",
+        "time": "HORA",
+        "library": "BIBLIOTECA",
+        "room": "SALA",
+        "status": "ESTADO",
+        "actions": "ACCIONES"
+      },
+      "cancel": "Cancelar"
+    },
     "form": {
       "library": {
         "label": "Biblioteca",
-        "placeholder": "Selecciona una biblioteca"
+        "placeholder": "Seleccionar biblioteca",
+        "options": {
+          "getafe": "CC.Sociales y Jurídicas - Getafe",
+          "colmenarejo": "Menéndez Pidal - Colmenarejo",
+          "leganes": "Biblioteca Escuela Politécnica Superior - Leganés"
+        }
       },
       "date": {
         "label": "Fecha"
       },
-      "time": {
-        "label": "Horario",
-        "placeholder": "Selecciona un horario"
+      "timeSlot": {
+        "label": "Hora",
+        "placeholder": "Seleccionar hora"
       },
-      "submit": "Comprobar disponibilidad"
+      "submit": "Verificar Salas Disponibles",
+      "closed": {
+        "title": "Biblioteca Cerrada",
+        "message": "La biblioteca está cerrada los domingos"
+      }
     },
-    "backToForm": "Volver al formulario",
-    "success": {
-      "title": "¡Sala Reservada!",
-      "description": "Has reservado correctamente la {{roomName}}"
-    },
-    "error": {
-      "title": "Error en la reserva"
-    },
-    "rooms": {
-      "type": "Sala {{number}}",
-      "prefix": "Sala",
-      "name": "{{prefix}} {{number}}",
-      "getafe": "Sala G{{number}}",
-      "colmenarejo": "Sala C{{number}}",
-      "leganes": "Sala L{{number}}"
-    },
-    "availableRooms": {
+    "roomAvailability": {
       "title": "Salas Disponibles",
-      "subtitle": "Biblioteca de {{library}} - {{date}}",
-      "capacity": "{{count}} personas",
       "table": {
         "room": "SALA",
         "capacity": "CAPACIDAD",
         "status": "ESTADO",
         "actions": "ACCIONES"
       },
+      "capacity": "{{count}} personas",
       "status": {
-        "available": "Disponible"
+        "active": "ACTIVA",
+        "inactive": "INACTIVA",
+        "available": "Disponible",
+        "booked": "Reservada"
       },
-      "actions": {
-        "reserve": "Reservar"
-      }
+      "reserve": "Reservar",
+      "backToForm": "Volver al Formulario"
+    },
+    "success": {
+      "title": "¡Sala Reservada!",
+      "description": "Has reservado exitosamente {{roomName}}"
     }
   },
   "libraries": {

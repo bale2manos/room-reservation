@@ -6,6 +6,7 @@ import { ReservationForm } from './ReservationForm'
 import { RoomAvailability } from './RoomAvailability'
 import { useReservations } from '../../context/ReservationContext'
 import { useAuth } from '../../context/AuthContext'
+import { useTranslation } from 'react-i18next'
 
 export function ReservationSystem() {
   const { addReservation } = useReservations()
@@ -14,6 +15,7 @@ export function ReservationSystem() {
   const navigate = useNavigate()
   const [showRoomSelection, setShowRoomSelection] = useState(false)
   const [formData, setFormData] = useState(null)
+  const { t } = useTranslation()
 
   const handleFormSubmit = (data) => {
     setFormData(data)
@@ -28,20 +30,19 @@ export function ReservationSystem() {
       roomId: room.id,
       roomName: room.name,
       date: formData.date,
-      time: formData.time,
+      timeSlot: formData.timeSlot,
       status: 'active',
       createdAt: new Date().toISOString()
     }
 
     addReservation(newReservation)
     toast({
-      title: 'Room Reserved!',
-      description: `You have successfully reserved ${room.name}`,
+      title: t('reservation.success.title'),
+      description: t('reservation.success.description', { roomName: room.name }),
       status: 'success',
       duration: 3000,
     })
     
-    // Reset form and redirect to reservations page
     setShowRoomSelection(false)
     setFormData(null)
     navigate('/reservations')
@@ -58,7 +59,7 @@ export function ReservationSystem() {
             onClick={() => setShowRoomSelection(false)}
             mb={4}
           >
-            Back to Form
+            {t('reservation.roomAvailability.backToForm')}
           </Button>
           <RoomAvailability
             onRoomSelect={handleRoomSelect}
